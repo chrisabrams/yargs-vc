@@ -1,18 +1,18 @@
 class YargsViewController {
 
-  static name = 'default';
+  static command = 'default';
   static description = 'Default description';
 
-  command() {
+  controller() {
 
-    console.log('running command!')
+    throw new Error('Command must have a controller');
 
   }
 
   constructor() {
 
     return [
-      this.constructor.name,
+      this.constructor.command,
       this.constructor.description,
       this.setup.bind(this),
       this.process.bind(this),
@@ -24,19 +24,17 @@ class YargsViewController {
 
     try {
 
-      this.command()
+      this.controller(argv);
 
     }
     catch(e) {
-      console.error('Could not process command')
-      console.error(e)
+      console.error('Could not process controller');
+      console.error(e);
     }
 
   }
 
   setup(yargs) {
-
-    console.log('setting up!')
 
   }
 
