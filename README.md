@@ -1,4 +1,4 @@
-# `yargs` 
+# `yargs`
 
 `yargs-vc`, or a `yargs` ViewController, is just a logical class for organizing the information a `yargs` command would receive.
 
