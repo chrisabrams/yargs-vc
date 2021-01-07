@@ -1,43 +1,28 @@
 class YargsViewController {
-
-  static command = 'default';
-  static description = 'Default description';
-
-  controller() {
-
-    throw new Error('Command must have a controller');
-
-  }
+  static command = 'default'
+  static description = 'Default description'
 
   constructor() {
-
     return [
       this.constructor.command,
       this.constructor.description,
-      this.setup.bind(this),
+      typeof this.setup == 'function' ? this.setup.bind(this) : undefined,
       this.process.bind(this),
-    ];
-
+    ]
   }
 
   process(argv) {
-
     try {
+      if (typeof this.controller != 'function') {
+        throw new Error('Command must have a controller')
+      }
 
-      this.controller(argv);
-
+      this.controller(argv)
+    } catch (e) {
+      console.error('Could not process controller')
+      console.error(e)
     }
-    catch(e) {
-      console.error('Could not process controller');
-      console.error(e);
-    }
-
   }
-
-  setup(yargs) {
-
-  }
-
 }
 
-module.exports = YargsViewController;
+module.exports = YargsViewController
